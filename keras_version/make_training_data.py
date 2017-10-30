@@ -36,8 +36,10 @@ window_size_x = 30
 window_size_y = 30
 
 # Load data
-direc_name = '/home/vanvalen/DeepCell/training_data/HeLa_joint/'
-file_name_save = os.path.join('/home/vanvalen/DeepCell/training_data_npz/HeLa/', 'HeLa_all_61x61.npz')
+usr_home = os.path.expanduser('~')
+root_dir = os.path.join(usr_home, "projects/deepcell")
+direc_name = os.path.join(root_dir, "training_data/HeLa_joint/")
+file_name_save = os.path.join(root_dir, "training_data_npz/HeLa/", "HeLa_all_61x61.npz")
 training_direcs = ["set1/", "set2/", "set3/", "set4/", "set5/"]
 channel_names = ["phase", "nuclear"]
 

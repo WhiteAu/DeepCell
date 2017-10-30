@@ -8,7 +8,7 @@ from __future__ import print_function
 from keras.optimizers import SGD, RMSprop
 
 from cnn_functions import rate_scheduler, train_model_sample
-from model_zoo import bn_feature_net_31x31 as the_model
+from model_zoo import bn_feature_net_61x61 
 
 import os
 import datetime
@@ -18,24 +18,21 @@ import keras
 batch_size = 256
 n_epoch = 25
 
-dataset = "mouse_embryos_31x31"
-expt = "bn_feature_net_31x31"
+dataset = "HeLa_all_61x61"
+expt = "bn_feature_net_61x61"
 
 usr_home = os.path.expanduser('~')
 root_dir = os.path.join(usr_home, "projects/deepcell")
-direc_save = os.path.join(root_dir, "trained_networks/mouse_embryos")
-direc_data = os.path.join(root_dir, "training_data_npz/mouse_embryos")
+direc_save = os.path.join(root_dir, "trained_networks/HeLa")
+direc_data = os.path.join(root_dir, "training_data_npz/HeLa")
 
 optimizer = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 lr_sched = rate_scheduler(lr = 0.01, decay = 0.95)
 class_weight = {0:1, 1:1, 2:1}
 
-print("iamge data format: {}".format(keras.backend.image_data_format()))
-print("iamge dim ordering format: {}".format(keras.backend.image_dim_ordering()))
-
 for iterate in xrange(5):
 
-	model = the_model(n_channels = 5, n_features = 3, reg = 1e-5)
+	model = bn_feature_net_61x61(n_channels = 2, n_features = 3, reg = 1e-5)
 
 	train_model_sample(model = model, 
                            dataset = dataset, 
